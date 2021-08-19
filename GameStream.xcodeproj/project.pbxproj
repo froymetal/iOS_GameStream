@@ -10,22 +10,26 @@
 		3A5E788D26C40D1C00138E06 /* InicioSesion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A5E788C26C40D1C00138E06 /* InicioSesion.swift */; };
 		3A5E788F26C40DAE00138E06 /* RegistroUsuario.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A5E788E26C40DAE00138E06 /* RegistroUsuario.swift */; };
 		3A5E789326C6F5BC00138E06 /* Home.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A5E789226C6F5BC00138E06 /* Home.swift */; };
+		3A5E789526C81A6E00138E06 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A5E789426C81A6D00138E06 /* HomeView.swift */; };
 		3AC9DC6D26C1765C003029FB /* GameStreamApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AC9DC6C26C1765C003029FB /* GameStreamApp.swift */; };
 		3AC9DC6F26C1765C003029FB /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AC9DC6E26C1765C003029FB /* ContentView.swift */; };
 		3AC9DC7126C17660003029FB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3AC9DC7026C17660003029FB /* Assets.xcassets */; };
 		3AC9DC7426C17660003029FB /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3AC9DC7326C17660003029FB /* Preview Assets.xcassets */; };
+		3AD1695226CECD3300CD42BB /* SubModuleHome.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AD1695126CECD3300CD42BB /* SubModuleHome.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		3A5E788C26C40D1C00138E06 /* InicioSesion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InicioSesion.swift; sourceTree = "<group>"; };
 		3A5E788E26C40DAE00138E06 /* RegistroUsuario.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistroUsuario.swift; sourceTree = "<group>"; };
 		3A5E789226C6F5BC00138E06 /* Home.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Home.swift; sourceTree = "<group>"; };
+		3A5E789426C81A6D00138E06 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		3AC9DC6926C1765C003029FB /* GameStream.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GameStream.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3AC9DC6C26C1765C003029FB /* GameStreamApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameStreamApp.swift; sourceTree = "<group>"; };
 		3AC9DC6E26C1765C003029FB /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		3AC9DC7026C17660003029FB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		3AC9DC7326C17660003029FB /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		3AC9DC7526C17660003029FB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		3AD1695126CECD3300CD42BB /* SubModuleHome.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubModuleHome.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -44,6 +48,8 @@
 			children = (
 				3A5E789126C6BDB300138E06 /* Inicio */,
 				3A5E789226C6F5BC00138E06 /* Home.swift */,
+				3A5E789426C81A6D00138E06 /* HomeView.swift */,
+				3AD1695126CECD3300CD42BB /* SubModuleHome.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -163,9 +169,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3AD1695226CECD3300CD42BB /* SubModuleHome.swift in Sources */,
 				3A5E788D26C40D1C00138E06 /* InicioSesion.swift in Sources */,
 				3AC9DC6F26C1765C003029FB /* ContentView.swift in Sources */,
 				3A5E789326C6F5BC00138E06 /* Home.swift in Sources */,
+				3A5E789526C81A6E00138E06 /* HomeView.swift in Sources */,
 				3AC9DC6D26C1765C003029FB /* GameStreamApp.swift in Sources */,
 				3A5E788F26C40DAE00138E06 /* RegistroUsuario.swift in Sources */,
 			);

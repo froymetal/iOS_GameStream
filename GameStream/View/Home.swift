@@ -6,40 +6,50 @@
 //
 
 import SwiftUI
+import UIKit
 
 struct Home: View {
+    @State var tabSeleccionado: Int = 2
+
     var body: some View {
 
 
-        TabView{
+        TabView(selection: $tabSeleccionado){
             Text("Perfil")
                 .font(.system(size: 30, weight: .bold, design: .rounded))
                 .tabItem {
                     Image(systemName: "person")
                     Text("Perfil")
-                }
+                }.tag(0)
 
             Text("Juegos")
                 .font(.system(size: 30, weight: .bold, design: .rounded))
                 .tabItem {
                     Image(systemName: "gamecontroller")
                     Text("Juegos")
-                }
-
-            Text(" Home")
-                .font(.system(size: 30, weight: .bold, design: .rounded))
-                .tabItem {
+                }.tag(1)
+            
+            HomeView().tabItem  {
                     Image(systemName: "house")
                     Text("Home")
-                }
+                }.tag(2)
 
             Text(" Favoritos")
                 .font(.system(size: 30, weight: .bold, design: .rounded))
                 .tabItem {
                     Image(systemName: "heart")
                     Text("Favoritos")
-                }
-        }
+                }.tag(3)
+        }.accentColor(.white)
+
+    }
+
+
+    init(){
+        UITabBar.appearance().barTintColor = UIColor(Color("tabBarColor"))
+        UITabBar.appearance().isTranslucent = true
+
+        print("Iniciando vistas de Home")
     }
 }
 
