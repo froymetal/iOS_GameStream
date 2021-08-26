@@ -2,7 +2,7 @@
 //  Home.swift
 //  GameStream
 //
-//  Created by Field Employee on 8/13/21.
+//  Created by Froy on 8/13/21.
 //
 
 import SwiftUI
@@ -33,8 +33,7 @@ struct Home: View {
                     Text("Home")
                 }.tag(2)
 
-            Text(" Favoritos")
-                .font(.system(size: 30, weight: .bold, design: .rounded))
+            FavoritesView()
                 .tabItem {
                     Image(systemName: "heart")
                     Text("Favoritos")

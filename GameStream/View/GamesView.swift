@@ -2,10 +2,11 @@
 //  GamesView.swift
 //  GameStream
 //
-//  Created by Field Employee on 8/19/21.
+//  Created by Froy on 8/19/21.
 //
 
 import SwiftUI
+import Kingfisher
 
 struct GamesView: View {
     @ObservedObject var todosLosVideojuegos = ViewModel()
@@ -53,26 +54,40 @@ struct GamesView: View {
                                 imgUrl = juego.galleryImages
 
                                 print("Pulse el juego: \(titulo)")
-                            }, label: {
-                                Text("juego: \(juego.title)")
 
-                                
+                                gameViewIsActive = true
+
+                            }, label: {
+                                KFImage(URL(string: juego.galleryImages[0])!)
+                                    .resizable()
+                                    .aspectRatio(contentMode: .fit)
+                                    .clipShape(RoundedRectangle.init(cornerRadius: 4 ))
+                                    .padding(.bottom, 12)
+
+
                             })
-                            
+
                         }
                     }
 
                 }
             }.padding(.horizontal, 6)
-        }.navigationBarHidden(true)
-            .navigationBarBackButtonHidden(true)
-            .onAppear(
-                perform: {
-                    print("Primer elemento del JSON: \(todosLosVideojuegos.gamesInfo[0])")
-                    print("TItulo del primer videojuego del JSON: \(todosLosVideojuegos.gamesInfo[0].title)")
-                }
 
-            )
+            NavigationLink(
+                destination: GameDestino(url: url, titulo: titulo, studio: studio, calificacion: calificacion,anoPublicacion: anoPublicacion, descripcion: descripcion, tags: tags, imgUrl: imgUrl),
+                isActive: $gameViewIsActive,
+                label: {
+                    Text("Navigate")
+                })
+        }.navigationBarHidden(true)
+        .navigationBarBackButtonHidden(true)
+        .onAppear(
+            perform: {
+                print("Primer elemento del JSON: \(todosLosVideojuegos.gamesInfo[0])")
+                print("TItulo del primer videojuego del JSON: \(todosLosVideojuegos.gamesInfo[0].title)")
+            }
+
+        )
     }
 }
 

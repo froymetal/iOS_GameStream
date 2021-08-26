@@ -22,30 +22,8 @@ struct HomeView: View {
                     .aspectRatio(contentMode: .fit)
                     .frame(width: 250)
                     .padding( .horizontal, 11)
-
-                HStack{
-                    //Buscador
-                    Button(action: {
-                        //Método de buscar
-                        busqueda()
-                    }, label: {
-                        Image(systemName: "magnifyingglass")
-                            .foregroundColor(textoBusqueda.isEmpty ? Color(.yellow) : Color("Dark-Cian"))
-                    })
-
-                    ZStack(alignment: .leading){
-                        if textoBusqueda.isEmpty{
-                            Text("Buscar video")
-                                .foregroundColor(Color(red: 174/255, green: 177/255, blue: 185/255, opacity: 1.0))
-                        }
-
-                        TextField("", text: $textoBusqueda)
-                            .foregroundColor(.white)
-                    }
-                }
-                .padding([.top, .leading, .bottom], 11)
-                .background(Color("Boton1"))
-                .clipShape(Capsule())
+                    //.padding(.init(.top, 10))
+                
                 SubModuleHome()
             }.padding(.horizontal,18)
 
@@ -54,12 +32,6 @@ struct HomeView: View {
 
 
     }
-
-
-    func busqueda(){
-        print("Buscar \(textoBusqueda)")
-    }
-//    SubModuleHome()
 }
 
 

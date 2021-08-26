@@ -9,14 +9,59 @@ import SwiftUI
 import AVKit
 
 struct SubModuleHome: View{
-    @State var url = "https://cdn.cloudflare.steamstatic.com/steam/apps/256658589/movie480.mp4"
-        @State var isPlayerActive = false
-        let urlVideos:[String] = ["https://cdn.cloudflare.steamstatic.com/steam/apps/256658589/movie480.mp4","https://cdn.cloudflare.steamstatic.com/steam/apps/256671638/movie480.mp4","https://cdn.cloudflare.steamstatic.com/steam/apps/256720061/movie480.mp4","https://cdn.cloudflare.steamstatic.com/steam/apps/256814567/movie480.mp4","https://cdn.cloudflare.steamstatic.com/steam/apps/256705156/movie480.mp4","https://cdn.cloudflare.steamstatic.com/steam/apps/256801252/movie480.mp4","https://cdn.cloudflare.steamstatic.com/steam/apps/256757119/movie480.mp4"]
+    @State var textoBusqueda = ""
+    @State var isGameInfoEmpty = false
+
+
+    @ObservedObject var juegoEncontrado = SearchGame()
+    @State var isGameViewActive = false
+    @State var url: String = ""
+    @State var titulo: String = ""
+    @State var studio: String = ""
+    @State var calificacion: String = ""
+    @State var anoPublicacion: String = ""
+    @State var descripcion: String = ""
+    @State var tags: [String] = [""]
+    @State var imgsUrl: [String] = [""]
+
+
+
+//    @State var url = "https://cdn.cloudflare.steamstatic.com/steam/apps/256658589/movie480.mp4"
+//        @State var isPlayerActive = false
+//        let urlVideos:[String] = ["https://cdn.cloudflare.steamstatic.com/steam/apps/256658589/movie480.mp4","https://cdn.cloudflare.steamstatic.com/steam/apps/256671638/movie480.mp4","https://cdn.cloudflare.steamstatic.com/steam/apps/256720061/movie480.mp4","https://cdn.cloudflare.steamstatic.com/steam/apps/256814567/movie480.mp4","https://cdn.cloudflare.steamstatic.com/steam/apps/256705156/movie480.mp4","https://cdn.cloudflare.steamstatic.com/steam/apps/256801252/movie480.mp4","https://cdn.cloudflare.steamstatic.com/steam/apps/256757119/movie480.mp4"]
 
     var body: some View{
 
 
         VStack {
+            ////////////////////////
+            HStack{
+                //Buscador
+                Button(action: {
+                    //Método de buscar
+                    //busqueda()
+                    watchGame(name: textoBusqueda)
+                }, label: {
+                    Image(systemName: "magnifyingglass")
+                        .foregroundColor(textoBusqueda.isEmpty ? Color(.yellow) : Color("Dark-Cian"))
+                }).alert(isPresented: $isGameInfoEmpty){
+                    Alert(title: Text("Error"), message: Text("No se encontró el juego"), dismissButton: .default(Text("Entendido")))
+                }
+
+                ZStack(alignment: .leading){
+                    if textoBusqueda.isEmpty{
+                        Text("Buscar video")
+                            .foregroundColor(Color(red: 174/255, green: 177/255, blue: 185/255, opacity: 1.0))
+                    }
+
+                    TextField("", text: $textoBusqueda)
+                        .foregroundColor(.white)
+                }
+            }
+            .padding([.top, .leading, .bottom], 11)
+            .background(Color("Boton1"))
+            .clipShape(Capsule())
+
             Text("LOS MÁS POPULARES")
                 .font(.title3)
                 .foregroundColor(.white)
@@ -27,9 +72,7 @@ struct SubModuleHome: View{
             ZStack{
 
                 Button(action: {
-                    url = urlVideos[0]
-                    print("URL: \(url)")
-                    isPlayerActive = true
+                    watchGame(name: "The Witcher 3")
                 }, label: {
                     VStack(spacing: 0){
                         Image("thewitcher")
@@ -37,7 +80,7 @@ struct SubModuleHome: View{
                             .scaledToFill()
                         Text("Witcher3")
                             .frame(minWidth: 0, maxWidth: .infinity, alignment: .leading)
-                            .background(Color("Button1"))
+                            .background(Color("Boton1"))
                     }
                 })
 
@@ -110,8 +153,7 @@ struct SubModuleHome: View{
             ScrollView(.horizontal, showsIndicators: false){
                 HStack{
                     Button(action: {
-                        url = urlVideos[1]
-                        isPlayerActive = true
+                        watchGame(name: "Abzu")
                     },
                     label: {
                         Image("Abzu")
@@ -121,8 +163,7 @@ struct SubModuleHome: View{
                     })
 
                     Button(action: {
-                        url = urlVideos[2]
-                        isPlayerActive = true
+                        watchGame(name: "Crash")
                     },
                     label: {
                         Image("Crash")
@@ -132,8 +173,7 @@ struct SubModuleHome: View{
                     })
 
                     Button(action: {
-                        url = urlVideos[2]
-                        isPlayerActive = true
+                        watchGame(name: "DeathStranding")
                     },
                     label: {
                         Image("DeathStranding")
@@ -147,10 +187,9 @@ struct SubModuleHome: View{
         }
 
         NavigationLink(
-            destination: VideoPlayer(player: AVPlayer(url: URL(string: url)!))
-                .frame(width: 400, height: 300)
+            destination: GameDestino(url: url, titulo: titulo, studio: studio, calificacion: calificacion, anoPublicacion: anoPublicacion, descripcion: descripcion, tags: tags, imgUrl: imgsUrl)
             ,
-            isActive: $isPlayerActive,
+            isActive: $isGameViewActive,
             label: {
                 EmptyView()
             })
@@ -158,6 +197,32 @@ struct SubModuleHome: View{
         
         
 }
+    func watchGame(name: String ){
+        juegoEncontrado.search(gameName: name)
+
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.3){
+
+            print("Cantidad  Elementos encontrados: \(juegoEncontrado.gameInfo.count) ")
+
+            if juegoEncontrado.gameInfo.count == 0 {
+                isGameInfoEmpty = true
+            }else{
+                url = juegoEncontrado.gameInfo[0].videosUrls.mobile
+                titulo = juegoEncontrado.gameInfo[0].title
+                studio = juegoEncontrado.gameInfo[0].studio
+                calificacion = juegoEncontrado.gameInfo[0].contentRaiting
+                anoPublicacion = juegoEncontrado.gameInfo[0].publicationYear
+                descripcion = juegoEncontrado.gameInfo[0].description
+                tags = juegoEncontrado.gameInfo[0].tags
+                imgsUrl = juegoEncontrado.gameInfo[0].galleryImages
+
+                isGameViewActive = true
+
+
+            }
+
+        }
+    }
 
 }
 

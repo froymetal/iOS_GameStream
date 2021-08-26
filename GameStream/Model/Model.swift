@@ -8,6 +8,11 @@
 
 import Foundation
 
+//Para guardar los resultados de las busquedas
+struct Resultados: Codable{
+    var results: [Game]
+}
+//Para guardar todos los juegos
 struct Games: Codable{
     var games: [Game]
 }
@@ -28,3 +33,5 @@ struct videoUrl: Codable, Hashable{
     var mobile: String
     var tablet: String
 }
+
+
